@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BiggieCon — Digital experiences, engineered.</title>
+    <style>
+        :root {
+            --site-primary: #7657F6;
+            --site-secondary: #101321;
+            --site-background: #090B12;
+            --site-on-primary: #FFFFFF;
+            --site-on-secondary: #F7F7FC;
+            --site-on-background: #F5F6FA;
+            --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            --site-heading-scale: 1;
+            --site-spacing-scale: 1;
+            --site-radius-scale: 1;
+            --site-decoration-opacity: 1;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--site-font-body);
+            background: #090B12;
+            color: #F5F6FA;
+            line-height: 1.6
+        }
+
+        .root {
+            background-color: light-dark(var(--site-background), var(--site-background));
+            color: var(--site-on-background);
+            min-height: 100vh;
+            border-radius: 0;
+            overflow: hidden
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 44px));
+            margin: auto
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            border-bottom: 1px solid #ffffff12
+        }
+
+        .brand {
+            font-weight: 850;
+            letter-spacing: -1px;
+            font-size: 1.35rem
+        }
+
+        .brand span {
+            color: #9B86FF
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 28px;
+            color: #B8B9C8;
+            font-size: .9rem
+        }
+
+        .navlinks a:hover,
+        .mutedlink:hover {
+            color: #fff
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 19px;
+            border-radius: 11px;
+            background: var(--site-primary);
+            color: white;
+            font-weight: 700;
+            border: 1px solid transparent;
+            transition: .2s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1)
+        }
+
+        .btn.outline {
+            background: transparent;
+            border-color: #ffffff2b;
+            color: #f4f4fa
+        }
+
+        .hero {
+            padding: 92px 0 74px;
+            position: relative
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: #B8AAFF;
+            background: #7657F61c;
+            border: 1px solid #7657F644;
+            border-radius: 100px;
+            padding: 7px 12px;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #71E6B2;
+            box-shadow: 0 0 12px #71E6B2
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7.5vw, 6.4rem);
+            line-height: .99;
+            letter-spacing: -.075em;
+            margin: 25px 0;
+            max-width: 900px;
+            font-weight: 850
+        }
+
+        .gradient {
+            background: linear-gradient(105deg, #B7A7FF 5%, #8B70FF 48%, #65DCC0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+
+        .lead {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: #B7B9C9;
+            max-width: 660px
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 32px 0
+        }
+
+        .metrics {
+            display: flex;
+            gap: 44px;
+            flex-wrap: wrap;
+            margin-top: 56px;
+            padding-top: 26px;
+            border-top: 1px solid #ffffff15
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.3rem;
+            color: #fff
+        }
+
+        .metric span {
+            font-size: .82rem;
+            color: #8D90A5
+        }
+
+        section {
+            padding: 74px 0
+        }
+
+        .sectionhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 24px;
+            margin-bottom: 30px
+        }
+
+        .kicker {
+            color: #9B86FF;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            line-height: 1.1;
+            letter-spacing: -.055em;
+            margin: 9px 0
+        }
+
+        .sub {
+            color: #A7A9BB;
+            max-width: 590px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px
+        }
+
+        .card {
+            background: linear-gradient(145deg, #151827, #10121D);
+            border: 1px solid #ffffff12;
+            border-radius: 20px;
+            padding: 26px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .projectvisual {
+            height: 220px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            background: #1A1C2C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative
+        }
+
+        .projectvisual:before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #7657F6;
+            filter: blur(80px);
+            opacity: .3
+        }
+
+        .mock {
+            position: relative;
+            width: 80%;
+            background: #0c0e17;
+            border: 1px solid #ffffff20;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 18px 50px #0008
+        }
+
+        .mockbar {
+            height: 7px;
+            width: 40%;
+            background: #8B70FF;
+            border-radius: 9px;
+            margin-bottom: 12px
+        }
+
+        .mockline {
+            height: 6px;
+            background: #ffffff18;
+            border-radius: 9px;
+            margin: 8px 0;
+            width: 80%
+        }
+
+        .mockline.short {
+            width: 45%
+        }
+
+        .mocktiles {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px
+        }
+
+        .mocktiles span {
+            height: 48px;
+            flex: 1;
+            border-radius: 6px;
+            background: #252943
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0
+        }
+
+        .tag {
+            font-size: .74rem;
+            color: #C5C6D4;
+            background: #ffffff0a;
+            border: 1px solid #ffffff12;
+            border-radius: 100px;
+            padding: 5px 9px
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            letter-spacing: -.03em;
+            margin: 0 0 8px
+        }
+
+        .card p {
+            color: #A7A9BB;
+            margin: 0
+        }
+
+        .arrow {
+            color: #A99AFF;
+            font-weight: 800;
+            display: inline-block;
+            margin-top: 18px
+        }
+
+        .services {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .serviceicon {
+            font-size: 1.45rem;
+            margin-bottom: 14px;
+            display: block
+        }
+
+        .service h3 {
+            font-size: 1.1rem;
+            margin: 0 0 8px
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px
+        }
+
+        .step {
+            border-top: 1px solid #7657F677;
+            padding-top: 18px
+        }
+
+        .stepnum {
+            color: #9B86FF;
+            font-size: .8rem;
+            font-weight: 800
+        }
+
+        .step h3 {
+            font-size: 1rem;
+            margin: 8px 0
+        }
+
+        .step p {
+            color: #A7A9BB;
+            font-size: .9rem
+        }
+
+        .aboutbox {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+            background: #111420;
+            border: 1px solid #ffffff12;
+            border-radius: 22px;
+            padding: 36px
+        }
+
+        .skillcloud {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .skillcloud span {
+            padding: 9px 13px;
+            border: 1px solid #ffffff18;
+            border-radius: 9px;
+            background: #ffffff06;
+            color: #D1D2DE;
+            font-size: .86rem
+        }
+
+        .cta {
+            background: radial-gradient(ellipse at 80% 20%, #7657F633, transparent 45%), #111420;
+            border: 1px solid #ffffff15;
+            border-radius: 24px;
+            padding: 50px;
+            text-align: center
+        }
+
+        .cta h2 {
+            max-width: 700px;
+            margin: 10px auto 18px
+        }
+
+        .cta p {
+            color: #B0B2C2;
+            max-width: 620px;
+            margin: 0 auto 26px
+        }
+
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid #ffffff12;
+            color: #8D90A5;
+            font-size: .85rem
+        }
+
+        .footerrow {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap
+        }
+
+        @media(max-width:760px) {
+            .navlinks {
+                display: none
+            }
+
+            .hero {
+                padding: 64px 0 50px
+            }
+
+            .grid,
+            .aboutbox {
+                grid-template-columns: 1fr
+            }
+
+            .services {
+                grid-template-columns: 1fr
+            }
+
+            .process {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .cta {
+                padding: 32px 20px
+            }
+
+            .metrics {
+                gap: 24px
+            }
+
+            .projectvisual {
+                height: 180px
+            }
+        }
+
+        @media(max-width:420px) {
+            .process {
+                grid-template-columns: 1fr
+            }
+
+            .wrap {
+                width: min(100% - 30px, 1120px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div class="wrap">
+            <nav>
+                <a class="brand" href="#top">Biggie<span>Con</span>.</a>
+                <div class="navlinks"><a href="#work">Work</a><a href="#services">Services</a><a
+                        href="#about">About</a><a href="#process">Process</a></div>
+                <a class="btn" href="#contact">Let’s talk ↗</a>
+            </nav>
+            <main id="top">
+                <header class="hero">
+                    <div class="eyebrow"><span class="dot"></span> Available for select projects</div>
+                    <h1>I build digital products<br>that <span class="gradient">move business forward.</span></h1>
+                    <p class="lead">Full-stack developer and digital problem-solver crafting purposeful websites, web
+                        apps, and seamless experiences for ambitious businesses around the world.</p>
+                    <div class="actions"><a class="btn" href="#work">Explore my work ↘</a><a class="btn outline"
+                            href="#contact">Start a project</a></div>
+                    <div class="metrics">
+                        <div class="metric"><strong>End-to-end</strong><span>From idea to launch</span></div>
+                        <div class="metric"><strong>Web · Apps · SaaS</strong><span>Digital solutions</span></div>
+                        <div class="metric"><strong>Remote-ready</strong><span>Collaborating worldwide</span></div>
+                    </div>
+                </header>
+                <section id="work">
+                    <div class="sectionhead">
+                        <div>
+                            <div class="kicker">Selected work</div>
+                            <h2>Built to solve real problems.</h2>
+                            <p class="sub">A closer look at product thinking, engineering, and practical execution.</p>
+                        </div><a class="arrow" href="#contact">Have a project? ↗</a>
+                    </div>
+                    <div class="grid">
+                        <article class="card">
+                            <div class="projectvisual">
+                                <div class="mock">
+                                    <div class="mockbar"></div>
+                                    <div class="mockline"></div>
+                                    <div class="mockline short"></div>
+                                    <div class="mocktiles"><span></span><span></span><span></span></div>
+                                </div>
+                            </div>
+                            <div class="kicker">Flagship · SaaS</div>
+                            <h3>Panafri — Invoice & Tax Platform</h3>
+                            <p>A freelance business platform designed to simplify invoicing, income tracking, and
+                                country-aware tax workflows for African professionals.</p>
+                            <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span
+                                    class="tag">PostgreSQL</span><span class="tag">Paystack</span><span
+                                    class="tag">Render</span></div><a class="arrow" href="https://panafri.app"
+                                target="_blank" rel="noopener">Visit live product ↗</a>
+                        </article>
+                        <article class="card">
+                            <div class="projectvisual">
+                                <div class="mock">
+                                    <div class="mockbar" style="background:#65DCC0"></div>
+                                    <div class="mockline"></div>
+                                    <div class="mockline short"></div>
+                                    <div class="mocktiles"><span style="background:#1b3c3b"></span><span
+                                            style="background:#213a37"></span><span style="background:#1a2d2b"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kicker">Web development</div>
+                            <h3>Business websites & web experiences</h3>
+                            <p>Responsive, conversion-conscious digital presence built around clear messaging,
+                                thoughtful user journeys, and polished interfaces.</p>
+                            <div class="tags"><span class="tag">Responsive UI</span><span class="tag">UX</span><span
+                                    class="tag">Performance</span><span class="tag">SEO foundations</span></div><a
+                                class="arrow" href="#contact">Discuss your website ↗</a>
+                        </article>
+                    </div>
+                    <p style="color:#777B91;font-size:.82rem;margin-top:16px">Portfolio note: Panafri is a live product.
+                        Other examples describe service capabilities and can be replaced with client case studies as
+                        they become available.</p>
+                </section>
+                <section id="services">
+                    <div class="sectionhead">
+                        <div>
+                            <div class="kicker">What I do</div>
+                            <h2>One partner. From concept to code.</h2>
+                            <p class="sub">Flexible development support for startups, small businesses, and teams.</p>
+                        </div>
+                    </div>
+                    <div class="grid services">
+                        <article class="card service"><span class="serviceicon">✳</span>
+                            <h3>Web & App Development</h3>
+                            <p>Custom websites and web applications built with maintainable code and business goals in
+                                mind.</p>
+                        </article>
+                        <article class="card service"><span class="serviceicon">⌘</span>
+                            <h3>Backend & API Engineering</h3>
+                            <p>Flask-based backend systems, database design, integrations, and secure authentication
+                                flows.</p>
+                        </article>
+                        <article class="card service"><span class="serviceicon">◈</span>
+                            <h3>UI Implementation</h3>
+                            <p>Responsive interfaces that turn design direction into consistent, accessible user
+                                experiences.</p>
+                        </article>
+                        <article class="card service"><span class="serviceicon">↗</span>
+                            <h3>Deployment & Integration</h3>
+                            <p>Production deployment, third-party service integrations, and environment configuration.
+                            </p>
+                        </article>
+                        <article class="card service"><span class="serviceicon">⚙</span>
+                            <h3>Debugging & Optimization</h3>
+                            <p>Find and resolve issues, improve reliability, and streamline existing applications.</p>
+                        </article>
+                        <article class="card service"><span class="serviceicon">◎</span>
+                            <h3>Product Collaboration</h3>
+                            <p>Clear communication, iterative delivery, and practical problem-solving across remote
+                                teams.</p>
+                        </article>
+                    </div>
+                </section>
+                <section id="process">
+                    <div class="sectionhead">
+                        <div>
+                            <div class="kicker">How I work</div>
+                            <h2>Clear process. Reliable delivery.</h2>
+                        </div>
+                    </div>
+                    <div class="process">
+                        <div class="step"><span class="stepnum">01 / DISCOVER</span>
+                            <h3>Understand the goal</h3>
+                            <p>Align on the problem, audience, requirements, and definition of success.</p>
+                        </div>
+                        <div class="step"><span class="stepnum">02 / PLAN</span>
+                            <h3>Map the solution</h3>
+                            <p>Break the work into milestones, scope the features, and set expectations.</p>
+                        </div>
+                        <div class="step"><span class="stepnum">03 / BUILD</span>
+                            <h3>Develop & refine</h3>
+                            <p>Build in focused iterations, share progress, and incorporate feedback.</p>
+                        </div>
+                        <div class="step"><span class="stepnum">04 / SHIP</span>
+                            <h3>Test & launch</h3>
+                            <p>Verify key flows, deploy, and provide a clean handoff.</p>
+                        </div>
+                    </div>
+                </section>
+                <section id="about">
+                    <div class="aboutbox">
+                        <div>
+                            <div class="kicker">About BiggieCon</div>
+                            <h2>Engineering with a business mindset.</h2>
+                            <p class="sub">I’m an independent developer focused on building useful digital products—not
+                                just writing code. I care about the user experience, the details behind the interface,
+                                and whether the solution actually helps the business.</p>
+                            <p class="sub">I’m comfortable taking a project from requirements and architecture through
+                                implementation, integration, and deployment, while keeping communication clear
+                                throughout.</p>
+                        </div>
+                        <div>
+                            <div class="kicker" style="margin-bottom:14px">Tools & technologies</div>
+                            <div class="skillcloud">
+                                <span>Python</span><span>Flask</span><span>JavaScript</span><span>HTML &
+                                    CSS</span><span>SQL</span><span>PostgreSQL</span><span>REST APIs</span><span>Git &
+                                    GitHub</span><span>Render</span><span>Paystack integration</span><span>Responsive
+                                    design</span><span>Security-minded development</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact">
+                    <div class="cta">
+                        <div class="kicker">Let’s build something valuable</div>
+                        <h2>Have a project in mind? Let’s make it real.</h2>
+                        <p>Whether you need a business website, a web application, or help improving an existing
+                            product, I’m open to discussing your goals and finding the right approach.</p><a class="btn"
+                            href="mailto:dozieobi2023@gmail.com?subject=Project%20Inquiry">Send a project inquiry ↗</a>
+
+                    </div>
+                </section>
+            </main>
+            <footer>
+                <div class="footerrow"><span class="brand">Biggie<span>Con</span>.</span><span>Independent digital
+                        development · Available worldwide</span><span>© <span id="year"></span> BiggieCon</span></div>
+            </footer>
+        </div>
+    </div>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
